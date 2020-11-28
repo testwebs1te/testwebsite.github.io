@@ -70,7 +70,26 @@
      <br><br>
 
       <div>
-      	<video controls="" class="vd"><source src="vd.mp4" type="video/mp4"></video>
+      	<video controls="" class="vd">name: 
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the site in the webs1t.github.io container
+      run: |
+        docker run \
+        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/webs1t/_site \
+        jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"<source src="vd.mp4" type="video/mp4"></video>
       		<h3>Eden Hazard</h3>
       		<br><br>
       	</div>
